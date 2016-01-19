@@ -34,6 +34,7 @@ var imageRoutes 					= require('./routes/image');
 var ajax		 					= require('./routes/ajax');
 
 var passport 						= require('passport');
+var fs = require('fs');
 
 
 /*

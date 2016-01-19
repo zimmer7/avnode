@@ -1,7 +1,48 @@
 var config = require('getconfig');
-var im = require('imagemagick');
 var fs = require('fs');
 var mkdirp = require('mkdirp');
+var gm = require('gm');
+var process = require('process');
+var sha1 = require('sha1');
+
+// FIXME
+exports.processImage = function(path, w, h) {
+  var processedFolder = '/warehouse/_processed/';
+  var processedImage = sha1(path + w + h) + '.jpg';
+
+  doesExist = function(file) {
+    try {
+      if (fs.statSync(file)) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch(err) { }
+  }
+
+  // already there? skip
+  if (doesExist(process.cwd() + processedFolder + processedImage)) {
+    return processedFolder + processedImage;
+  }
+
+  if (doesExist(process.cwd() + path)) {
+    gm(process.cwd() + path)
+    .crop(w, h, 0, 0)
+    .write(process.cwd() + processedFolder + processedImage, function (err) {
+      if (err) {
+        gm(w, h, "#888")
+        .fontSize(32)
+        .drawText(0, 0, "No Image", "Center")
+        .write(process.cwd() + processedFolder + processedImage, function (err) {
+        });
+      }
+    });
+  } else {
+    return "https://placehold.it/" + w + "x" + h + "?text=No+image";
+  }
+  console.log('process image', path);
+  return "";
+}
 
 // FIXME
 // Refactor and write a test

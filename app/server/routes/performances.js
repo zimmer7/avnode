@@ -52,7 +52,8 @@ exports.get = function get(req, res) {
 				result: performer,
         categories: config.sections[section].categories,
         orderings: config.sections[section].orders,
-				user: req.user
+				user: req.user,
+        _h: _h
 			});
 		});
 	});

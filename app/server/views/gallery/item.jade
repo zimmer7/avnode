@@ -11,7 +11,7 @@ div.list_item_performer.grid-item.col-sm-4(class="col-md-4 gallery_footage")
 						span= box.stats.visits
 			each file, i in box.files
 				if i === 0
-					img(alt=box.title, src=file.file)
+					img(alt=box.title, src=_h.media.processImage(file.file, 480, 320))
 		.title_and_info_container
 			h3= box.title
 			ul.list-inline.box_other_infos

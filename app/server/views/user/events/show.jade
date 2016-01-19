@@ -6,10 +6,11 @@ block content
 				.row
 					.col-md-12
 						.single_event_thumb_container
-							//.image
-							//	img.img-responsive(alt=__("Thumbnail of")+": "+result.title, src=_h.media.getFileFormat(result.files, 400, 300))
-							.row
-								.overlay_container.col-sm-12
+							.row.overlay_container
+								.col-sm-12.col-md-4
+									.image
+										img.img-responsive(alt=__("Thumbnail of")+": "+result.title, src=_h.media.processImage(result.files, 360, 240))
+								.col-sm-12.col-md-8
 									a.btn.btn-info.paticipate.pull-right(href='participate', role='button') Participate
 									h1.title=result.title
 									if result.subtitle
@@ -94,8 +95,7 @@ block content
 														.col-md-12
 															h3.single_event-room_title=name
 													each box in room
-														.row.main-list.grid_tab.performance_single-event_list
-															include ../../performances/item
+														include ../../performances/item
 
 							if result.partners
 								#partners.tab-pane
@@ -105,8 +105,7 @@ block content
 												h3=name
 										.container
 											each box in type
-												.row.main-list.grid_tab
-													include ../../performers/item
+												include ../../performers/item
 
 							if result.partners
 								#gallery.tab-pane
